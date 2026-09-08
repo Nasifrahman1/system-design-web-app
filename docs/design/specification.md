@@ -1,79 +1,62 @@
-# Specification: [Your App Idea Name]
+# Business Case — Coffee Franchise Location Directory
 
-App description: [Write a one or two sentences describing what your app does and who it’s for.]
+## 1. Problem / Opportunity
+MOTW Coffee has multiple franchise locations, but location details (hours, manager contact, basic stats) are scattered across spreadsheets and texts instead of living in one place.
 
-## Style and Theme
+## 2. Proposed Solution
+A simple web app listing all MOTW locations. Clicking a location opens a detail view with its info. Users can pin locations they check often.
 
-[Describe the look and feel of your app.] 
+## 3. Options Considered
 
-Overall mood:
-Examples: fun and playful, calm and professional, bold and energetic, etc.
+| Option | Description | Pros | Cons |
+|--------|-------------|------|------|
+| Option A | Keep using shared spreadsheets | No build cost, familiar | Hard to search, gets outdated fast |
+| Option B (recommended) | Build a small web directory app | Fast lookup, one source of truth, pinning for quick access | Takes time to build, needs upkeep |
 
-Use the *style-guide.html* for details on styling -- fonts, colors, and layout.
+## 4. Feasibility
 
-## User Scenarios
+| Type | Assessment |
+|------|------------|
+| Operational — will people actually use/support this? | Yes, staff already look this info up regularly |
+| Technical — can we build it with what we have/can get? | Yes, small Vue.js app with a CSV dataset, no server needed |
+| Economic — does the payoff justify the cost? | Yes, low build cost against time saved from faster lookups |
+| Schedule — can it be done in a useful timeframe? | Yes, a working prototype fits in one short dev cycle |
 
-### Story 1 (most important)
+## 5. Costs & Benefits
 
-[Write 1-2 sentences. Who is using the app, what do they want to do, and what do they see when it works? Write it like you are describing it to a friend.]
+**Costs** (one-time + ongoing):
+
+| Item | One-time | Ongoing/year |
+|------|----------|----------------|
+| Development | Low | — |
+| Keeping data updated | — | Some staff time monthly |
+
+**Benefits** (tangible + intangible):
+
+| Benefit | Tangible ($/time saved)? | Notes |
+|---------|-----------------------------|-------|
+| Faster location lookups | Yes | Replaces manual spreadsheet searching |
+| Fewer errors from outdated info | Intangible | One source instead of scattered files |
+| Easier onboarding | Intangible | New staff can self-serve location info |
+
+**Payback period:** A few months, mostly from staff time saved
+**ROI:** Positive within the first year, since the build cost is small relative to time saved
+
+*(See Toolkit Part C — Financial Analysis Tools document for payback, ROI, and present value formulas.)*
+
+## 6. Priority & Urgency
+As MOTW grows, the spreadsheet approach only gets messier. Building this now, while there aren't many locations yet, is easier than fixing it later.
+
+## 7. Recommendation
+Go with Option B — build the MOTW Location Directory as a small internal web app.
+
+## 8. Approval
+
+| Role | Name | Date | Decision |
+|------|------|------|----------|
+| Sponsor | | | Go / No-go |
 
 ---
 
-## Requirements
-
-Write clear statements about what the app must do.
-
-### Functional Requirements
-
-1. The app must include these pages:
-	 - Home (`#/`)
-	 - Collection (`#/items`)
-	 - Item detail (`#/items/:id`)
-	 - About (`#/about`)
-2. The navigation bar must let people move to Home, Items, and About.
-3. The app must load data from `items-template.csv` (a simple text table file).
-4. The collection page must show one card per row in the data file.
-5. Each card must include name, short description, and image (if available).
-6. Each card must include a way to open that item's detail page.
-7. The detail page must show full information for one selected item.
-
-### Key Data
-
-Use this as the basic item shape from the current starter data file.
-
-- Item
-	- id
-	- name
-	- description
-	- category
-	- image_url
-	- location
-
-## Success Criteria
-
-Describe what success looks like in simple, observable terms.
-
-1. A new person can open the app and reach the collection page in one click from Home.
-2. A new person can open one item detail page from the collection without help.
-3. If the data cannot load, the app shows a clear message instead of a blank page.
-
-
-
-### Starter defaults
-
-The template starts with Bootstrap default styling (light background, blue primary, simple cards). You only need to describe the changes you want.
-
-## Assumptions
-
-- This is a beginner project for learning how to describe app behavior before generating code. It is a prototype, not a finished product.
-- The app stays simple and uses one text table data file as its data source.
-- The data may use placeholder images or no images at all. Use picsum.photos for any needed placeholder images.
-- Styling remains based on Bootstrap classes already used in the starter project.
-- The first version focuses on clarity and working basics, not advanced features.
-
-## Notes for Students (How to Use This Template)
-
-- Keep each section short and plain.
-- Write for a classmate who is not technical.
-- Focus on user actions and visible results.
-- Start with Story 1 and only add extras if you have time.
+### Primary sources
+- *Systems Analysis and Design*, 10th ed. (Cengage, 2017) — Ch. 2 "Analyzing the Business Case" and Toolkit Part C "Financial Analysis Tools"
