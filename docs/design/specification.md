@@ -36,10 +36,10 @@ A regional manager or franchising lead can open the app, enter the shared passco
 ## 2. Scope
 
 **In scope**
-- Landing page introducing the directory
-- Collection view listing all MOTW locations
-- Detail view per location: city, full address, hours, on-site manager contact, and franchisee/owner contact are visible to everyone; the 3-month sales trend is hidden behind the passcode
-- Comparison/Dashboard view: side-by-side sales and projection data across locations, sortable, with underperformance flagging — entirely behind the passcode
+- Landing page introducing the directory (kept intentionally as its own screen, separate from Collection view, to leave room for additional introductory elements as the app grows)
+- Collection view listing all MOTW locations, with a state filter and a name/city/address search to stay usable as the location count grows toward 30–50
+- Detail view per location: state, city, full address, hours, on-site manager contact, and franchisee/owner contact are visible to everyone; the 3-month sales trend is hidden behind the passcode and, once unlocked, appears in place on the same Detail view (no redirect), with a separate control to continue to Comparison view
+- Comparison/Dashboard view: side-by-side sales and projection data across locations, sortable, with underperformance flagging — entirely behind the passcode, with a control to navigate back to Collection view
 - A single shared passcode prompt that gates all financial data (Comparison view + Detail view sales trend)
 - Ability to pin/favorite locations for quick access (persists locally for that visitor — see Constraints)
 - Data sourced from a structured location/sales dataset (fictional/placeholder financial figures for this build)
@@ -99,7 +99,12 @@ A regional manager or franchising lead can open the app, enter the shared passco
 | R12 | When a user attempts to open the Comparison view or a location's sales trend, the system shall prompt for the shared passcode before displaying any financial figures. | Event |
 | R13 | If an incorrect passcode is entered, then the system shall deny access and allow the user to try again. | Unwanted behavior |
 | R14 | While a correct passcode has been entered during the current session, the system shall not prompt again for that session. | State |
-| R15 | The Detail view shall display each location's city, full address, and franchisee/owner contact, in addition to hours and manager contact, with no passcode required. | Ubiquitous |
+| R15 | The Detail view shall display each location's state, city, full address, and franchisee/owner contact, in addition to hours and manager contact, with no passcode required. | Ubiquitous |
+| R16 | When a user selects a state filter in the Collection view, the system shall display only locations in that state. | Event |
+| R17 | When a user enters a search term in the Collection view, the system shall display only locations whose name, city, or address match the term. | Event |
+| R18 | When a user enters the correct passcode from a location's Detail view, the system shall reveal that location's sales trend in place on the Detail view, without navigating away. | Event |
+| R19 | The Detail view shall provide a control that navigates to the Comparison view. | Ubiquitous |
+| R20 | The Comparison view shall provide a control that navigates back to the Collection view. | Ubiquitous |
 
 ---
 
@@ -118,7 +123,12 @@ A regional manager or franchising lead can open the app, enter the shared passco
 | R12 | Click into the Comparison view or a location's sales trend without having entered the passcode | A passcode prompt appears before any financial figures are shown |
 | R13 | Enter an incorrect passcode | Access is denied and the user can retry |
 | R14 | Enter the correct passcode once, then navigate to a second financial view in the same session | No second prompt appears |
-| R15 | Open a location's Detail view without entering a passcode | City, full address, and franchisee/owner contact are all visible alongside hours and manager contact |
+| R15 | Open a location's Detail view without entering a passcode | State, city, full address, and franchisee/owner contact are all visible alongside hours and manager contact |
+| R16 | Select a state from the filter in Collection view | Only locations in that state are shown; other locations are hidden |
+| R17 | Type a location's name, city, or address into the search field | Only matching locations are shown |
+| R18 | Enter the correct passcode from a location's Detail view | The sales trend appears on that same Detail view; the user is not redirected to Comparison view |
+| R19 | On a location's Detail view, click the control leading to Comparison view | Comparison view opens |
+| R20 | On the Comparison view, click the back control | Collection view opens |
 
 ---
 
@@ -147,7 +157,12 @@ None outstanding for this build. All items resolved during drafting and research
 | Cross-device pin syncing | Not supported — local to each visitor's device only, by design (no accounts) |
 | Dataset update ownership/cadence | Manual updates by Nasif, no fixed schedule |
 | Who can see financial data | Gated behind a shared passcode (Comparison view + Detail view sales trend); hours/contact/address/city/franchisee-owner info stay open to all |
-| What fields does the directory need beyond hours/contact | Resolved via interview: city, full address, and franchisee/owner contact are needed, primarily for coordinating with vendors and distributors |
+| What fields does the directory need beyond hours/contact | Resolved via interview: state, city, full address, and franchisee/owner contact are needed, primarily for coordinating with vendors and distributors |
+| Where does unlocking the passcode from Detail view take the user | Resolved via interview: stays on Detail view, reveals the sales trend in place, with a separate button forward to Comparison view (R18, R19) |
+| How should locations be filtered/searched at 30–50 locations | Resolved via interview: filter by state (more useful than city at this scale) plus a general search box (R16, R17) |
+| Does Comparison view need a way back | Resolved via prototype self-evaluation: yes — added an explicit back-to-Collection control (R20), since the browser back button alone isn't a reliable UX pattern to depend on |
+| Should the Landing page be folded into Collection view | Resolved: kept as a separate screen, on purpose, to leave room for additional introductory elements as the app grows beyond this build |
+| Should the sales trend render as a chart or as raw values | Deliberately left open at the spec level — this is a visual/implementation choice, not a behavioral requirement, and belongs in `plan.md` once building begins |
 
 ---
 
