@@ -20,16 +20,16 @@ Non-negotiable principles this product must never violate, regardless of feature
 ## 1. Problem & Intent
 
 **Who is this for?**
-MOTW Coffee & Pastries regional managers and ownership who need to compare location performance, not just look up contact info. Shift leads and staff also use the basic directory (hours, manager contact) but should not see financial data.
+MOTW Coffee & Pastries regional managers, ownership, and franchising leadership who need to compare location performance and maintain accurate location details — not just look up contact info. Shift leads and staff also use the basic directory (hours, manager contact) but should not see financial data.
 
 **What problem do they have today?**
-Location details (hours, manager contact) and sales performance both live in scattered spreadsheets. There's no single place to see how locations stack up against each other or where a location is trending — and no easy way to keep financial figures separate from the basic staff-facing info.
+There is no working central directory. The existing corporate website lists locations but doesn't automatically sync with each location's Google listing, so hours and contact information has drifted out of date. There's also no single record combining shop, city, address, hours, on-site manager contact, and the franchisee/owner contact — information franchising leadership currently has to piece together manually, including when coordinating with vendors and distributors who work across all locations. Sales performance also lives in scattered spreadsheets, with no single place to see how locations stack up against each other or where a location is trending.
 
 **Why now / why us?**
-As the franchise grows past a handful of locations, informal side-by-side comparisons (eyeballing separate spreadsheets) stop scaling and make it slow to spot underperforming or standout locations.
+As the franchise grows past a handful of locations, informal side-by-side comparisons (eyeballing separate spreadsheets, an outdated website) stop scaling. At 30 and soon 50 locations, manually tracking every location individually becomes impractical.
 
 **What does success look like?**
-A regional manager can open the app, enter the shared passcode, and within a minute identify which locations are ahead of or behind projection for the period — without exporting or merging spreadsheets, and without exposing that data to staff who don't need it.
+A regional manager or franchising lead can open the app, enter the shared passcode when needed, and within a minute either find accurate location/contact details or identify which locations are ahead of or behind projection — without exporting or merging spreadsheets, and without exposing financial data to staff who don't need it.
 
 ---
 
@@ -38,7 +38,7 @@ A regional manager can open the app, enter the shared passcode, and within a min
 **In scope**
 - Landing page introducing the directory
 - Collection view listing all MOTW locations
-- Detail view per location: hours and manager contact are visible to everyone; the 3-month sales trend is hidden behind the passcode
+- Detail view per location: city, full address, hours, on-site manager contact, and franchisee/owner contact are visible to everyone; the 3-month sales trend is hidden behind the passcode
 - Comparison/Dashboard view: side-by-side sales and projection data across locations, sortable, with underperformance flagging — entirely behind the passcode
 - A single shared passcode prompt that gates all financial data (Comparison view + Detail view sales trend)
 - Ability to pin/favorite locations for quick access (persists locally for that visitor — see Constraints)
@@ -52,6 +52,7 @@ A regional manager can open the app, enter the shared passcode, and within a min
 - Live/real-time financial data — figures are monthly snapshots, not real-time feeds
 - Real financial data of any kind (see Constitution #2)
 - Real security — the passcode is a lightweight deterrent, not encryption or access control a determined person couldn't bypass (see Constraints)
+- Automatic syncing with Google listings or other outside sources (a known gap in the current corporate website — this build fixes staleness via a single maintained dataset instead, not automation)
 
 ---
 
@@ -98,6 +99,7 @@ A regional manager can open the app, enter the shared passcode, and within a min
 | R12 | When a user attempts to open the Comparison view or a location's sales trend, the system shall prompt for the shared passcode before displaying any financial figures. | Event |
 | R13 | If an incorrect passcode is entered, then the system shall deny access and allow the user to try again. | Unwanted behavior |
 | R14 | While a correct passcode has been entered during the current session, the system shall not prompt again for that session. | State |
+| R15 | The Detail view shall display each location's city, full address, and franchisee/owner contact, in addition to hours and manager contact, with no passcode required. | Ubiquitous |
 
 ---
 
@@ -116,6 +118,7 @@ A regional manager can open the app, enter the shared passcode, and within a min
 | R12 | Click into the Comparison view or a location's sales trend without having entered the passcode | A passcode prompt appears before any financial figures are shown |
 | R13 | Enter an incorrect passcode | Access is denied and the user can retry |
 | R14 | Enter the correct passcode once, then navigate to a second financial view in the same session | No second prompt appears |
+| R15 | Open a location's Detail view without entering a passcode | City, full address, and franchisee/owner contact are all visible alongside hours and manager contact |
 
 ---
 
@@ -126,7 +129,7 @@ A regional manager can open the app, enter the shared passcode, and within a min
 - **Accessibility:** Text should be readable at default browser zoom; interactive elements (pins, sort controls, location links, passcode field) should be reachable via keyboard
 - **Compliance/Legal:** None identified for this build — fictional data only, internal-use concept
 - **Budget/Timeline:** No build cost beyond time; fits within the course module's timeframe
-- **Data ownership:** The dataset is updated manually by Nasif as location or sales data changes; no fixed update schedule
+- **Data ownership:** The dataset is updated manually by Nasif as location or sales data changes; no fixed update schedule. This matters more than it might sound — research surfaced that the current corporate website has already gone stale relative to individual locations' Google listings, so keeping this dataset current is the actual value proposition, not an afterthought
 - **Storage model:** Pinned locations and "passcode entered" state both persist locally on that visitor's device only — no accounts, no cross-device sync, consistent with the no-server-dependency constraint
 - **Passcode distribution:** Shared verbally/directly by Nasif to managers and ownership — not written anywhere in the app's visible UI or documentation
 
@@ -134,16 +137,17 @@ A regional manager can open the app, enter the shared passcode, and within a min
 
 ## 7. Open Questions
 
-None outstanding. All items resolved during drafting:
+None outstanding for this build. All items resolved during drafting and research:
 
 | Question | Resolution |
 |----------|------------|
-| Projection formula | Prior month's actual sales + 3% |
+| Projection formula | Prior month's actual sales + 3%, kept simple for this build. Research (interview with Head of Franchising) surfaced that the real evaluation method is different — each store's first 5 months set its own baseline average, and performance is monitored against that baseline going forward. This is a stronger, more realistic approach and is flagged as a future improvement rather than built now, to keep this version's scope manageable |
 | Trend history length | 3 months per location |
 | Underperformance flag threshold | 5% or more below projection |
 | Cross-device pin syncing | Not supported — local to each visitor's device only, by design (no accounts) |
 | Dataset update ownership/cadence | Manual updates by Nasif, no fixed schedule |
-| Who can see financial data | Gated behind a shared passcode (Comparison view + Detail view sales trend); hours/contact stay open to all |
+| Who can see financial data | Gated behind a shared passcode (Comparison view + Detail view sales trend); hours/contact/address/city/franchisee-owner info stay open to all |
+| What fields does the directory need beyond hours/contact | Resolved via interview: city, full address, and franchisee/owner contact are needed, primarily for coordinating with vendors and distributors |
 
 ---
 
