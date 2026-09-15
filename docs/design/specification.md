@@ -138,14 +138,11 @@ None outstanding. All items resolved during drafting:
 ---
 
 ## 8. Plan (derived from this spec — separate document once approved)
-
+ 
 Once the spec above is approved, translate it into:
 - **`plan.md`** — the approach and key decisions, each traced back to a requirement ID above
 - **`tasks.md`** — atomic, ordered, checkable tasks derived from the plan
-
-Not started yet — spec needs research and prototyping first per the assignment instructions.
-
----
+Do not skip from spec straight to a build without reviewing the plan first.
 
 ## 9. Approval
 
