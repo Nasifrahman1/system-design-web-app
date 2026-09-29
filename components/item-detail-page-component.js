@@ -9,6 +9,7 @@ export default {
     const itemsStore = Vue.inject('itemsStore');
     const route = VueRouter.useRoute();
     const showSalesTrend = Vue.ref(false);
+    const passcodeError = Vue.ref('');
 
     const selectedItem = Vue.computed(() => {
       return itemsStore.items.find((item) => item.id === route.params.id);
@@ -18,12 +19,22 @@ export default {
         showSalesTrend.value = true;
       }
     };
+    const submitPasscode = (enteredPasscode) => {
+      if (enteredPasscode === 'motw2024') {
+        passcodeError.value = '';
+        revealSalesTrend(enteredPasscode);
+        return;
+      }
+
+      passcodeError.value = 'Incorrect passcode. Try again.';
+    };
 
     return {
       itemsStore,
       selectedItem,
       showSalesTrend,
-      revealSalesTrend,
+      passcodeError,
+      submitPasscode,
     };
   },
   template: /* html */ `
@@ -70,7 +81,7 @@ export default {
           <section v-if="!showSalesTrend" class="border border-danger rounded p-4 mt-4">
             <h2 class="h5 text-danger"><i class="bi-lock-fill" aria-hidden="true"></i> Sales trend locked</h2>
             <p class="text-muted">Enter the shared passcode to view the three-month sales trend.</p>
-            <passcode-prompt-component @submit="revealSalesTrend" />
+            <passcode-prompt-component :error-message="passcodeError" @submit="submitPasscode" />
           </section>
 
           <section v-else class="mt-4">
