@@ -8,7 +8,7 @@ export default {
   setup() {
     const itemsStore = Vue.inject('itemsStore');
     const route = VueRouter.useRoute();
-    const showSalesTrend = Vue.ref(false);
+    const showSalesTrend = Vue.ref(sessionStorage.getItem('motw-passcode-unlocked') === 'true');
     const passcodeError = Vue.ref('');
 
     const selectedItem = Vue.computed(() => {
@@ -17,6 +17,7 @@ export default {
     const revealSalesTrend = (enteredPasscode) => {
       if (enteredPasscode === 'motw2024') {
         showSalesTrend.value = true;
+        sessionStorage.setItem('motw-passcode-unlocked', 'true');
       }
     };
     const submitPasscode = (enteredPasscode) => {

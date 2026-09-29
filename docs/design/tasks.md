@@ -18,7 +18,7 @@
 | T10 | Add a pin/star toggle to each location card and persist pinned items in localStorage | R5, R6 | T4 | Dome|
 | T11 | Add the gated 3-month sales trend section to the Detail view and keep it hidden until the correct passcode is entered | R12, R18 | T5, T6 | Done |
 | T12 | Add incorrect-passcode handling so the prompt denies access and allows the user to retry | R13 | T6 | Done |
-| T13 | Add session-scoped localStorage logic so the correct passcode is remembered during the current session and does not re-prompt | R14 | T6, T12 | Not started |
+| T13 | Add session-scoped localStorage logic so the correct passcode is remembered during the current session and does not re-prompt | R14 | T6, T12 | Done |
 | T14 | Wire the correct passcode to reveal the sales trend in place on the Detail view and add the control that navigates to Comparison view | R18, R19, ADR-04 | T11, T6, T12, T13 | Not started |
 | T15 | Build the Comparison view to list locations with actual sales, projected sales, and sorting by the chosen metric | R9, R10 | T6, T14 | Not started |
 | T16 | Add the underperformance flag in the Comparison view for locations at least 5% below projection | R11 | T15 | Not started |
