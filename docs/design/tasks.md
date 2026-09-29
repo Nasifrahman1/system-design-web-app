@@ -20,7 +20,7 @@
 | T12 | Add incorrect-passcode handling so the prompt denies access and allows the user to retry | R13 | T6 | Done |
 | T13 | Add session-scoped localStorage logic so the correct passcode is remembered during the current session and does not re-prompt | R14 | T6, T12 | Done |
 | T14 | Wire the correct passcode to reveal the sales trend in place on the Detail view and add the control that navigates to Comparison view | R18, R19, ADR-04 | T11, T6, T12, T13 | Done |
-| T15 | Build the Comparison view to list locations with actual sales, projected sales, and sorting by the chosen metric | R9, R10 | T6, T14 | Not started |
+| T15 | Build the Comparison view to list locations with actual sales, projected sales, and sorting by the chosen metric | R9, R10 | T6, T14 | Done |
 | T16 | Add the underperformance flag in the Comparison view for locations at least 5% below projection | R11 | T15 | Not started |
 | T17 | Add a back-to-Collection control on the Comparison view so users can return to the list view | R20 | T15 | Not started |
 | T18 | Adapt the Landing page component to introduce the directory and link into the Collection view | R1 | T4 | Not started |
