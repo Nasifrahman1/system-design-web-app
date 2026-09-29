@@ -57,6 +57,9 @@ export default {
   },
   template: /* html */ `
     <section class="container py-4">
+      <router-link to="/items" class="btn btn-outline-secondary mb-3">
+        Back to Collection
+      </router-link>
       <h1 class="h3 mb-4">Comparison View</h1>
 
       <section v-if="!isUnlocked" class="border border-danger rounded p-4">
