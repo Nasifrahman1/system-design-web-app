@@ -9,21 +9,27 @@ export default {
     const itemsStore = Vue.inject('itemsStore');
     const showPasscodePrompt = Vue.ref(false);
     const selectedState = Vue.ref('');
+    const searchTerm = Vue.ref('');
     const states = Vue.computed(() => {
       return [...new Set(itemsStore.items.map((item) => item.state))].sort();
     });
     const filteredItems = Vue.computed(() => {
-      if (!selectedState.value) {
-        return itemsStore.items;
-      }
+      const normalizedSearchTerm = searchTerm.value.trim().toLowerCase();
 
-      return itemsStore.items.filter((item) => item.state === selectedState.value);
+      return itemsStore.items.filter((item) => {
+        const matchesState = !selectedState.value || item.state === selectedState.value;
+        const searchableText = `${item.name} ${item.city} ${item.address}`.toLowerCase();
+        const matchesSearch = !normalizedSearchTerm || searchableText.includes(normalizedSearchTerm);
+
+        return matchesState && matchesSearch;
+      });
     });
 
     return {
       itemsStore,
       showPasscodePrompt,
       selectedState,
+      searchTerm,
       states,
       filteredItems,
     };
@@ -50,6 +56,16 @@ export default {
           <option value="">All states</option>
           <option v-for="state in states" :key="state" :value="state">{{ state }}</option>
         </select>
+      </div>
+
+      <div class="mb-4">
+        <label for="location-search" class="form-label">Search locations</label>
+        <input
+          id="location-search"
+          v-model="searchTerm"
+          type="search"
+          class="form-control"
+          placeholder="Search by name, city, or address" />
       </div>
 
       <div v-if="itemsStore.isLoading" class="alert alert-secondary" role="status">
