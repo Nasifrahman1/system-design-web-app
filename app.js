@@ -1,5 +1,4 @@
 import LandingPageComponent from './components/landing-page-component.js';
-import AboutPageComponent from './components/about-page-component.js';
 import NavbarComponent from './components/navbar-component.js';
 import CollectionPageComponent from './components/collection-page-component.js';
 import ItemDetailPageComponent from './components/item-detail-page-component.js';
@@ -9,10 +8,6 @@ const routes = [
   {
     path: '/',
     component: LandingPageComponent,
-  },
-  {
-    path: '/about',
-    component: AboutPageComponent,
   },
   {
     path: '/items',
