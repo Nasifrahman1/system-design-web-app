@@ -13,7 +13,7 @@
 | T5 | Adapt the Detail view component to show the always-visible public fields: state, city, full address, hours, manager contact, and franchisee/owner contact | R4, R15 | T2 | Done |
 | T6 | Build the shared passcode prompt component and reuse it from both the Collection view and the Detail view | R12, R13, ADR-01 | T4, T5 | Done |
 | T7 | Add the Compare Locations button on the Collection view so it opens the shared passcode prompt | R12 | T6 | Done|
-| T8 | Add the state filter control to the Collection view so users can narrow the list by state | R16, ADR-03 | T4 | Not started |
+| T8 | Add the state filter control to the Collection view so users can narrow the list by state | R16, ADR-03 | T4 | Done |
 | T9 | Add the search box to the Collection view so it matches on location name, city, or address | R17 | T4 | Not started |
 | T10 | Add a pin/star toggle to each location card and persist pinned items in localStorage | R5, R6 | T4 | Not started |
 | T11 | Add the gated 3-month sales trend section to the Detail view and keep it hidden until the correct passcode is entered | R12, R18 | T5, T6 | Not started |

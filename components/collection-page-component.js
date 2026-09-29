@@ -8,10 +8,24 @@ export default {
   setup() {
     const itemsStore = Vue.inject('itemsStore');
     const showPasscodePrompt = Vue.ref(false);
+    const selectedState = Vue.ref('');
+    const states = Vue.computed(() => {
+      return [...new Set(itemsStore.items.map((item) => item.state))].sort();
+    });
+    const filteredItems = Vue.computed(() => {
+      if (!selectedState.value) {
+        return itemsStore.items;
+      }
+
+      return itemsStore.items.filter((item) => item.state === selectedState.value);
+    });
 
     return {
       itemsStore,
       showPasscodePrompt,
+      selectedState,
+      states,
+      filteredItems,
     };
   },
   template: /* html */ `
@@ -19,7 +33,7 @@ export default {
       <div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="h3 mb-0">Collection</h1>
         <div class="d-flex align-items-center gap-2">
-          <span class="badge text-bg-light border">{{ itemsStore.items.length }} shown</span>
+          <span class="badge text-bg-light border">{{ filteredItems.length }} shown</span>
           <button type="button" class="btn btn-primary" @click="showPasscodePrompt = true">
             Compare Locations
           </button>
@@ -29,6 +43,14 @@ export default {
       <p class="text-muted">Browse a simple dataset loaded from a CSV file.</p>
 
       <passcode-prompt-component v-if="showPasscodePrompt" />
+
+      <div class="mb-4">
+        <label for="state-filter" class="form-label">Filter by state</label>
+        <select id="state-filter" v-model="selectedState" class="form-select">
+          <option value="">All states</option>
+          <option v-for="state in states" :key="state" :value="state">{{ state }}</option>
+        </select>
+      </div>
 
       <div v-if="itemsStore.isLoading" class="alert alert-secondary" role="status">
         Loading items...
@@ -43,7 +65,7 @@ export default {
       </div>
 
       <div v-else class="row g-3">
-        <div class="col-12 col-md-6 col-lg-4" v-for="item in itemsStore.items" :key="item.id">
+        <div class="col-12 col-md-6 col-lg-4" v-for="item in filteredItems" :key="item.id">
           <article class="card h-100 shadow-sm border-0">
             <div class="card-body d-flex flex-column">
               <div class="mb-2">
