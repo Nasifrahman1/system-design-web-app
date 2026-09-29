@@ -1,20 +1,34 @@
+import PasscodePromptComponent from './passcode-prompt-component.js';
+
 export default {
   name: 'collection-page-component',
+  components: {
+    PasscodePromptComponent,
+  },
   setup() {
     const itemsStore = Vue.inject('itemsStore');
+    const showPasscodePrompt = Vue.ref(false);
 
     return {
       itemsStore,
+      showPasscodePrompt,
     };
   },
   template: /* html */ `
     <section class="container py-4">
       <div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="h3 mb-0">Collection</h1>
-        <span class="badge text-bg-light border">{{ itemsStore.items.length }} shown</span>
+        <div class="d-flex align-items-center gap-2">
+          <span class="badge text-bg-light border">{{ itemsStore.items.length }} shown</span>
+          <button type="button" class="btn btn-primary" @click="showPasscodePrompt = true">
+            Compare Locations
+          </button>
+        </div>
       </div>
 
       <p class="text-muted">Browse a simple dataset loaded from a CSV file.</p>
+
+      <passcode-prompt-component v-if="showPasscodePrompt" />
 
       <div v-if="itemsStore.isLoading" class="alert alert-secondary" role="status">
         Loading items...
