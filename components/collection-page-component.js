@@ -31,28 +31,14 @@ export default {
       <div v-else class="row g-3">
         <div class="col-12 col-md-6 col-lg-4" v-for="item in itemsStore.items" :key="item.id">
           <article class="card h-100 shadow-sm border-0">
-            <img
-              v-if="item.imageUrl"
-              :src="item.imageUrl"
-              :alt="item.name"
-              class="card-img-top collection-card-image object-fit-cover" />
-            <div
-              v-else
-              class="collection-card-image d-flex align-items-center justify-content-center bg-light text-muted">
-              No image available
-            </div>
-
             <div class="card-body d-flex flex-column">
-              <div class="d-flex justify-content-between align-items-start mb-2">
+              <div class="mb-2">
                 <h2 class="h5 card-title mb-0">{{ item.name }}</h2>
-                <span class="badge text-bg-primary ms-2">{{ item.category || 'General' }}</span>
+                <p class="text-muted mb-0">{{ item.city }}, {{ item.state }}</p>
               </div>
 
-              <p class="card-text text-muted flex-grow-1 collection-description">
-                {{ item.description || 'No description available.' }}
-              </p>
-
-              <p class="small mb-3"><strong>Location:</strong> {{ item.location || 'N/A' }}</p>
+              <p class="small mb-2"><strong>Address:</strong> {{ item.address }}</p>
+              <p class="small text-muted flex-grow-1 mb-3"><strong>Hours:</strong> {{ item.hours }}</p>
 
               <div class="d-grid">
                 <router-link :to="'/items/' + item.id" class="btn btn-outline-secondary btn-sm">
