@@ -23,7 +23,7 @@
 | T15 | Build the Comparison view to list locations with actual sales, projected sales, and sorting by the chosen metric | R9, R10 | T6, T14 | Done |
 | T16 | Add the underperformance flag in the Comparison view for locations at least 5% below projection | R11 | T15 |Done|
 | T17 | Add a back-to-Collection control on the Comparison view so users can return to the list view | R20 | T15 | Done |
-| T18 | Adapt the Landing page component to introduce the directory and link into the Collection view | R1 | T4 | Not started |
+| T18 | Adapt the Landing page component to introduce the directory and link into the Collection view | R1 | T4 | Done |
 | T19 | Repurpose or remove the existing About page component so it does not interfere with the project scope or confuse the prototype flow | ADR-00 | — | Not started |
 
 **Status values:** Not started · In progress · Done · Blocked
