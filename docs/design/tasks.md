@@ -11,7 +11,7 @@
 | T3 | Add a visible error state when the dataset cannot load, so the app shows a clear message instead of a blank page | R7 | T2 | Done |
 | T4 | Adapt the Collection view component to render the location list from the loaded dataset instead of placeholder template data | R2, ADR-00 | T2 | Done |
 | T5 | Adapt the Detail view component to show the always-visible public fields: state, city, full address, hours, manager contact, and franchisee/owner contact | R4, R15 | T2 | Done |
-| T6 | Build the shared passcode prompt component and reuse it from both the Collection view and the Detail view | R12, R13, ADR-01 | T4, T5 | Not started |
+| T6 | Build the shared passcode prompt component and reuse it from both the Collection view and the Detail view | R12, R13, ADR-01 | T4, T5 | Done |
 | T7 | Add the Compare Locations button on the Collection view so it opens the shared passcode prompt | R12 | T6 | Not started |
 | T8 | Add the state filter control to the Collection view so users can narrow the list by state | R16, ADR-03 | T4 | Not started |
 | T9 | Add the search box to the Collection view so it matches on location name, city, or address | R17 | T4 | Not started |
