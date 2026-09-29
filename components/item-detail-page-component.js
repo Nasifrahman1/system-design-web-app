@@ -30,26 +30,29 @@ export default {
       </div>
 
       <article v-else class="card shadow-sm border-0 overflow-hidden">
-        <img
-          v-if="selectedItem.imageUrl"
-          :src="selectedItem.imageUrl"
-          :alt="selectedItem.name"
-          class="item-detail-image w-100 object-fit-cover" />
-        <div
-          v-else
-          class="item-detail-image w-100 d-flex align-items-center justify-content-center bg-light text-muted">
-          No image available
-        </div>
-
         <div class="card-body p-4">
-          <div class="d-flex align-items-center gap-2 mb-2">
-            <h1 class="h3 mb-0">{{ selectedItem.name }}</h1>
-            <span class="badge text-bg-primary">{{ selectedItem.category || 'General' }}</span>
-          </div>
+          <h1 class="h3 mb-1">{{ selectedItem.name }}</h1>
+          <p class="text-muted mb-4">{{ selectedItem.city }}, {{ selectedItem.state }}</p>
 
-          <p class="lead mb-3">{{ selectedItem.description || 'No description available.' }}</p>
-          <p class="mb-0"><strong>Location:</strong> {{ selectedItem.location || 'N/A' }}</p>
-          <p class="text-muted mt-2 mb-0"><strong>Item ID:</strong> {{ selectedItem.id }}</p>
+          <dl class="row mb-0">
+            <dt class="col-sm-4">Address</dt>
+            <dd class="col-sm-8">{{ selectedItem.address }}</dd>
+
+            <dt class="col-sm-4">Hours</dt>
+            <dd class="col-sm-8">{{ selectedItem.hours }}</dd>
+
+            <dt class="col-sm-4">Manager</dt>
+            <dd class="col-sm-8">
+              {{ selectedItem.managerName }}<br />
+              {{ selectedItem.managerContact }}
+            </dd>
+
+            <dt class="col-sm-4">Franchisee/owner</dt>
+            <dd class="col-sm-8">
+              {{ selectedItem.franchiseeOwner }}<br />
+              {{ selectedItem.franchiseeContact }}
+            </dd>
+          </dl>
         </div>
       </article>
     </section>
