@@ -55,10 +55,16 @@ const app = Vue.createApp({
               itemsStore.items = data.map((row) => ({
                 id: String(row.id || '').trim(),
                 name: String(row.name || '').trim(),
-                description: String(row.description || '').trim(),
-                category: String(row.category || '').trim(),
-                imageUrl: String(row.image_url || '').trim(),
-                location: String(row.location || '').trim(),
+                state: String(row.state || '').trim(),
+                city: String(row.city || '').trim(),
+                address: String(row.address || '').trim(),
+                hours: String(row.hours || '').trim(),
+                managerName: String(row.managerName || '').trim(),
+                managerContact: String(row.managerContact || '').trim(),
+                franchiseeOwner: String(row.franchiseeOwner || '').trim(),
+                franchiseeContact: String(row.franchiseeContact || '').trim(),
+                salesActual: JSON.parse(String(row.salesActual || '[]').trim()),
+                salesProjected: JSON.parse(String(row.salesProjected || '[]').trim()),
               }));
               itemsStore.error = '';
             }
