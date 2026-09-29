@@ -10,6 +10,9 @@ export default {
     const showPasscodePrompt = Vue.ref(false);
     const selectedState = Vue.ref('');
     const searchTerm = Vue.ref('');
+    const pinnedLocationIds = Vue.ref(
+      JSON.parse(localStorage.getItem('motw-pinned-locations') || '[]'),
+    );
     const states = Vue.computed(() => {
       return [...new Set(itemsStore.items.map((item) => item.state))].sort();
     });
@@ -24,6 +27,16 @@ export default {
         return matchesState && matchesSearch;
       });
     });
+    const isPinned = (locationId) => pinnedLocationIds.value.includes(locationId);
+    const togglePin = (locationId) => {
+      if (isPinned(locationId)) {
+        pinnedLocationIds.value = pinnedLocationIds.value.filter((id) => id !== locationId);
+      } else {
+        pinnedLocationIds.value = [...pinnedLocationIds.value, locationId];
+      }
+
+      localStorage.setItem('motw-pinned-locations', JSON.stringify(pinnedLocationIds.value));
+    };
 
     return {
       itemsStore,
@@ -32,6 +45,8 @@ export default {
       searchTerm,
       states,
       filteredItems,
+      isPinned,
+      togglePin,
     };
   },
   template: /* html */ `
@@ -84,9 +99,21 @@ export default {
         <div class="col-12 col-md-6 col-lg-4" v-for="item in filteredItems" :key="item.id">
           <article class="card h-100 shadow-sm border-0">
             <div class="card-body d-flex flex-column">
-              <div class="mb-2">
-                <h2 class="h5 card-title mb-0">{{ item.name }}</h2>
-                <p class="text-muted mb-0">{{ item.city }}, {{ item.state }}</p>
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div>
+                  <h2 class="h5 card-title mb-0">{{ item.name }}</h2>
+                  <p class="text-muted mb-0">{{ item.city }}, {{ item.state }}</p>
+                </div>
+                <button
+                  type="button"
+                  class="btn btn-link p-0 ms-2"
+                  :class="isPinned(item.id) ? 'text-warning' : 'text-muted'"
+                  :aria-label="isPinned(item.id) ? 'Unpin ' + item.name : 'Pin ' + item.name"
+                  :aria-pressed="isPinned(item.id)"
+                  :title="isPinned(item.id) ? 'Unpin location' : 'Pin location'"
+                  @click="togglePin(item.id)">
+                  <i :class="isPinned(item.id) ? 'bi-star-fill' : 'bi-star'" aria-hidden="true"></i>
+                </button>
               </div>
 
               <p class="small mb-2"><strong>Address:</strong> {{ item.address }}</p>
