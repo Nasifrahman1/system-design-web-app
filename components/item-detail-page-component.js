@@ -93,6 +93,9 @@ export default {
                 <strong>{{ sales }}</strong>
               </div>
             </div>
+            <router-link to="/comparison" class="btn btn-primary mt-3">
+              Compare Locations
+            </router-link>
           </section>
         </div>
       </article>

@@ -3,6 +3,7 @@ import AboutPageComponent from './components/about-page-component.js';
 import NavbarComponent from './components/navbar-component.js';
 import CollectionPageComponent from './components/collection-page-component.js';
 import ItemDetailPageComponent from './components/item-detail-page-component.js';
+import ComparisonPageComponent from './components/comparison-page-component.js';
 
 const routes = [
   {
@@ -20,6 +21,10 @@ const routes = [
   {
     path: '/items/:id',
     component: ItemDetailPageComponent,
+  },
+  {
+    path: '/comparison',
+    component: ComparisonPageComponent,
   },
 ];
 
