@@ -22,6 +22,7 @@ export default {
           actual,
           projected,
           variance: actual - projected,
+          variancePercentage: (actual - projected) / projected,
         };
       });
     });
@@ -83,14 +84,23 @@ export default {
                 <th scope="col">Actual sales</th>
                 <th scope="col">Projected sales</th>
                 <th scope="col">Variance</th>
+                <th scope="col">Status</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="row in sortedRows" :key="row.id">
+              <tr
+                v-for="row in sortedRows"
+                :key="row.id"
+                :class="row.variancePercentage <= -0.05 ? 'table-danger' : ''">
                 <th scope="row">{{ row.name }}</th>
                 <td>{{ row.actual.toFixed(2) }}</td>
                 <td>{{ row.projected.toFixed(2) }}</td>
                 <td>{{ row.variance.toFixed(2) }}</td>
+                <td>
+                  <span v-if="row.variancePercentage <= -0.05" class="text-danger fw-semibold">
+                    Underperforming
+                  </span>
+                </td>
               </tr>
             </tbody>
           </table>
